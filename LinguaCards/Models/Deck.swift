@@ -1,0 +1,63 @@
+import Foundation
+import SwiftData
+
+/// A study set: a titled collection of cards with a source and target language.
+@Model
+final class Deck {
+    @Attribute(.unique) var id: UUID
+    var title: String
+    var desc: String
+    /// BCP-47 code of the language of the card fronts (terms), e.g. "en-US".
+    var sourceLang: String
+    /// BCP-47 code of the language of the card backs (translations), e.g. "ru-RU".
+    var targetLang: String
+    var createdAt: Date
+
+    @Relationship(deleteRule: .cascade, inverse: \Card.deck)
+    var cards: [Card]
+
+    @Relationship(deleteRule: .cascade, inverse: \StudySession.deck)
+    var sessions: [StudySession]
+
+    init(
+        title: String,
+        desc: String = "",
+        sourceLang: String = "en-US",
+        targetLang: String = "ru-RU",
+        createdAt: Date = .now
+    ) {
+        self.id = UUID()
+        self.title = title
+        self.desc = desc
+        self.sourceLang = sourceLang
+        self.targetLang = targetLang
+        self.createdAt = createdAt
+        self.cards = []
+        self.sessions = []
+    }
+}
+
+extension Deck {
+    var cardCount: Int { cards.count }
+
+    var dueCards: [Card] {
+        cards.filter(\.isDue)
+    }
+
+    var dueCount: Int { dueCards.count }
+
+    var masteredCount: Int {
+        cards.filter(\.isMastered).count
+    }
+
+    /// Fraction of cards considered mastered, in 0...1.
+    var masteredFraction: Double {
+        guard !cards.isEmpty else { return 0 }
+        return Double(masteredCount) / Double(cards.count)
+    }
+
+    /// Consecutive days (ending today or yesterday) with at least one study session.
+    var studyStreak: Int {
+        StatsService.streak(sessionDates: sessions.map(\.date))
+    }
+}
