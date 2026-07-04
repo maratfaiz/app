@@ -1,6 +1,6 @@
 # LinguaCards
 
-A native iOS language-learning flashcard app in the spirit of Quizlet: decks of term/translation cards, four study modes, spaced repetition (simplified SM-2), progress stats and text-to-speech. Offline-first — all data lives on device in SwiftData, no backend.
+A native iOS language-learning flashcard app in the spirit of Quizlet: decks of term/translation cards, **six study modes** (Learn, Flashcards, Write, Match, Multiple choice, Test) plus spaced-repetition review, a polished gradient design system, progress stats and text-to-speech. Offline-first — all data lives on device in SwiftData, no backend.
 
 ## Requirements & building
 
@@ -22,11 +22,16 @@ MVVM on top of SwiftUI + SwiftData:
 ```
 LinguaCards/
 ├── LinguaCardsApp.swift        # @main: ModelContainer setup + first-launch seeding
+├── DesignSystem/
+│   ├── Theme.swift             # brand palette, per-deck gradients, spacing/radii, Color(hex:)
+│   └── Components.swift        # PrimaryButton, ProgressRing, GradientProgressBar, confetti, …
 ├── Models/                     # SwiftData @Model classes
 │   ├── Deck.swift              # title, desc, languages, cards[], sessions[] + stats helpers
-│   ├── Card.swift              # front/back/example + SM-2 state (ease, interval, reps, nextReview)
+│   ├── Card.swift              # front/back/example, isStarred, SM-2 state, MasteryLevel
 │   └── StudySession.swift      # per-session record (date, deck, correct/incorrect, mode)
 ├── ViewModels/                 # @Observable classes, one per study mode
+│   ├── LearnViewModel.swift    # adaptive Learn mode
+│   ├── TestViewModel.swift     # graded mixed-question Test
 │   ├── FlashcardsViewModel.swift
 │   ├── QuizViewModel.swift
 │   ├── TypingTestViewModel.swift
@@ -34,24 +39,27 @@ LinguaCards/
 │   └── ReviewViewModel.swift   # SRS review across one or many decks
 ├── Services/                   # Pure, unit-testable logic + system wrappers
 │   ├── SRSScheduler.swift      # simplified SM-2 (pure functions)
+│   ├── LearnEngine.swift       # adaptive box/queue engine for Learn (pure functions)
 │   ├── AnswerMatcher.swift     # fuzzy answer matching (pure functions)
 │   ├── ImportParser.swift      # "term - translation" bulk import parsing
+│   ├── StudyOptions.swift      # study direction + starred/shuffle options
 │   ├── StatsService.swift      # streaks + daily activity aggregation
 │   ├── SpeechService.swift     # AVSpeechSynthesizer wrapper
 │   ├── Haptics.swift           # haptic feedback helpers
 │   ├── LanguageCatalog.swift   # supported languages for pickers/TTS
 │   └── SeedData.swift          # sample deck inserted on first launch
 ├── Views/
-│   ├── RootView.swift          # TabView: Decks / Review / Stats
-│   ├── DeckListView.swift      # deck list with progress rings and due badges
-│   ├── DeckDetailView.swift    # stats header, study launcher, card list
+│   ├── RootView.swift          # TabView (Decks / Review / Stats) + onboarding gate
+│   ├── OnboardingView.swift    # first-launch welcome pages
+│   ├── DeckListView.swift      # gradient deck cards + search
+│   ├── DeckDetailView.swift    # gradient header, study options, mode grid, card list
 │   ├── DeckFormView.swift      # create/rename deck, language pickers
 │   ├── CardFormView.swift      # add/edit card
 │   ├── BulkImportView.swift    # paste-to-import
 │   ├── ReviewTodayView.swift   # due cards across all decks
-│   ├── StatsView.swift         # streak, 14-day chart (Swift Charts), mastery per deck
-│   ├── Study/                  # the four study mode screens + SRS review screen
-│   └── Components/             # FlipCardView, EmptyStateView, SpeakerButton, StudyResultsView
+│   ├── StatsView.swift         # streak, mastery breakdown, 14-day chart, per-deck mastery
+│   ├── Study/                  # Learn, Flashcards, Quiz, Write, Match, Test, Review screens
+│   └── Components/             # FlipCardView, MasteryBar, EmptyStateView, SpeakerButton, …
 ├── Resources/
 │   └── Localizable.xcstrings   # string catalog, English (source) + Russian
 └── Assets.xcassets
@@ -66,17 +74,22 @@ Design notes:
 
 ## What's implemented
 
-- **Decks** — create / rename / delete; title, description, source & target language; list with card count, due badge and mastery progress ring; empty states with CTAs.
-- **Cards** — add / edit / delete; front, back, optional example sentence; bulk import by pasting `term - translation` lines (also accepts `–`, `—`, `=`, tab separators).
+- **Design system** — a brand indigo→violet gradient identity; every deck gets its own deterministic gradient; reusable `PrimaryButton`, `ProgressRing`, `GradientProgressBar`, `MasteryBar`, stat pills and a confetti burst on great results. Full light & dark support.
+- **Onboarding** — a three-page gradient welcome on first launch (gated by `@AppStorage`).
+- **Decks** — create / rename / delete; title, description, source & target language; home screen of vibrant gradient deck cards with card count, due badge, starred count and mastery ring; **search** across decks; empty states with CTAs.
+- **Cards** — add / edit / delete; front, back, optional example sentence; **star / favorite** any card; bulk import by pasting `term - translation` lines (also accepts `–`, `—`, `=`, tab separators).
+- **Study options** — per-session **direction toggle** (term→translation or translation→term) and **starred-only** filter, applied across every mode.
 - **Study modes**
-  - *Flashcards*: tap to flip with a 3D rotation, swipe right = known / left = unknown (with drag badges and haptics), on-screen ✓/✕ buttons as an alternative.
-  - *Multiple choice*: 4 options drawn from other cards in the deck (needs ≥ 4 cards).
-  - *Typing test*: fuzzy matching — case- and diacritic-insensitive, punctuation/whitespace tolerant, small typos accepted on longer words ("almost correct" is graded as *Hard*).
-  - *Match game*: 6-pair grid of terms and translations, timed, mistake counter.
-- **Spaced repetition** — simplified SM-2 with Again / Hard / Good / Easy grades; each card stores ease factor, interval, repetition count and next review date; "Review today" tab shows due cards across all decks (all at once or per deck); every study mode feeds back into the schedule (e.g. a wrong quiz answer is a lapse).
-- **Progress & stats** — per-deck % mastered (mature cards: ≥ 3 successful reviews and interval ≥ 21 days), cards due today, study streak; global stats tab with a stacked 14-day activity bar chart (Swift Charts) and mastery-per-deck bars.
-- **Text-to-speech** — speaker button on every card/list row via `AVSpeechSynthesizer`, using the deck's language codes with graceful voice fallback.
-- **UX** — light & dark mode, haptic feedback on swipes and correct/wrong answers, localizable strings (English + Russian), empty states everywhere.
+  - *Learn* (flagship): Quizlet-style adaptive session — each term escalates from multiple-choice recognition to written recall and must be answered correctly twice to graduate; wrong answers are requeued; a progress bar tracks mastered vs. remaining. Backed by the pure, tested `LearnEngine`.
+  - *Flashcards*: tap to flip with a 3D rotation onto the deck's gradient, swipe right = known / left = unknown (drag badges + haptics), on-card star + speaker, ✓/✕ buttons.
+  - *Test*: a graded exam mixing written, multiple-choice and true/false questions; answer them all, then get a score ring and a per-question review with the correct answers.
+  - *Multiple choice*: 4 options drawn from other cards (needs ≥ 4 cards).
+  - *Write*: fuzzy matching — case/diacritic-insensitive, punctuation/whitespace tolerant, small typos accepted on longer words via Damerau-Levenshtein ("almost correct" grades as *Hard*).
+  - *Match*: 6-pair timed grid with a mistake counter.
+- **Spaced repetition** — simplified SM-2 with Again / Hard / Good / Easy grades; each card stores ease factor, interval, repetition count and next review date; "Review today" tab shows due cards across all decks (all at once or per deck); **every** study mode feeds back into the schedule.
+- **Progress & stats** — three-way mastery buckets (Not studied / Still learning / Mastered) shown as a segmented `MasteryBar` per deck and overall; per-deck % mastered, cards due, study streak; global stats tab with a stacked 14-day activity chart (Swift Charts).
+- **Text-to-speech** — speaker button on every card/prompt via `AVSpeechSynthesizer`, using the deck's language codes with graceful voice fallback.
+- **UX** — light & dark mode, haptic feedback throughout, localizable strings (English + Russian, ~138 keys), empty states everywhere.
 
 ## Simplified SM-2
 
@@ -94,8 +107,9 @@ Ease is clamped to [1.3, 3.0]. A card is *due* when its next review date is toda
 `LinguaCardsTests` covers the pure logic:
 
 - `SRSSchedulerTests` — new-card progression (1 → 6 → ×ease days), lapse behavior, ease clamping, Hard/Easy interval math, monotonic growth.
-- `AnswerMatcherTests` — case/diacritic/punctuation insensitivity, typo tolerance by word length, alternative answers ("дом / здание"), Levenshtein distance.
+- `AnswerMatcherTests` — case/diacritic/punctuation insensitivity, typo tolerance by word length, alternative answers ("дом / здание"), adjacent-transposition (Damerau-Levenshtein) distance.
 - `ImportParserTests` — separator variants, whitespace trimming, invalid-line skipping.
+- `LearnEngineTests` — Learn-mode queue: graduation after N correct, wrong-answer reset & requeue (no immediate repeat), termination and monotonic progress.
 
 ## Not implemented (ideas for later)
 

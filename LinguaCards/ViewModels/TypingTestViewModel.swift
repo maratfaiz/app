@@ -2,8 +2,8 @@ import Foundation
 import Observation
 import SwiftData
 
-/// Typing test: shows the term, the user types the translation,
-/// answers are checked with fuzzy matching.
+/// Typing test: shows the prompt, the user types the answer,
+/// which is checked with fuzzy matching.
 @Observable
 final class TypingTestViewModel {
 
@@ -13,6 +13,7 @@ final class TypingTestViewModel {
     }
 
     let deck: Deck
+    let options: StudyOptions
     private let modelContext: ModelContext
 
     private(set) var cards: [Card]
@@ -22,15 +23,21 @@ final class TypingTestViewModel {
     private(set) var phase = Phase.answering
     var input = ""
 
-    init(deck: Deck, modelContext: ModelContext) {
+    init(deck: Deck, options: StudyOptions = .default, modelContext: ModelContext) {
         self.deck = deck
+        self.options = options
         self.modelContext = modelContext
-        self.cards = deck.cards.shuffled()
+        self.cards = deck.cards(for: options)
     }
 
     var currentCard: Card? {
         cards.indices.contains(currentIndex) ? cards[currentIndex] : nil
     }
+
+    var promptText: String { currentCard?.prompt(for: options.direction) ?? "" }
+    var expectedAnswer: String { currentCard?.answer(for: options.direction) ?? "" }
+    var promptLanguage: String { deck.promptLanguage(for: options.direction) }
+    var answerLanguage: String { deck.answerLanguage(for: options.direction) }
 
     var isFinished: Bool { currentIndex >= cards.count }
 
@@ -41,7 +48,7 @@ final class TypingTestViewModel {
 
     func submit() {
         guard phase == .answering, let card = currentCard else { return }
-        let verdict = AnswerMatcher.evaluate(input: input, expected: card.back)
+        let verdict = AnswerMatcher.evaluate(input: input, expected: expectedAnswer)
         phase = .feedback(verdict)
 
         switch verdict {

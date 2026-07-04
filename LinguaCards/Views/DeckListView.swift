@@ -1,13 +1,22 @@
 import SwiftUI
 import SwiftData
 
-/// Home screen: all decks with card counts and mastery progress.
+/// Home screen: all decks as vibrant gradient cards, with search.
 struct DeckListView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Deck.createdAt, order: .reverse) private var decks: [Deck]
 
     @State private var isCreatingDeck = false
     @State private var deckToEdit: Deck?
+    @State private var searchText = ""
+
+    private var filteredDecks: [Deck] {
+        guard !searchText.isEmpty else { return decks }
+        return decks.filter {
+            $0.title.localizedCaseInsensitiveContains(searchText)
+                || $0.desc.localizedCaseInsensitiveContains(searchText)
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -21,26 +30,32 @@ struct DeckListView: View {
                         action: { isCreatingDeck = true }
                     )
                 } else {
-                    List {
-                        ForEach(decks) { deck in
-                            NavigationLink(value: deck) {
-                                DeckRowView(deck: deck)
-                            }
-                            .swipeActions(edge: .trailing) {
-                                Button(role: .destructive) {
-                                    delete(deck)
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
+                    ScrollView {
+                        LazyVStack(spacing: 16) {
+                            ForEach(filteredDecks) { deck in
+                                NavigationLink(value: deck) {
+                                    DeckCardView(deck: deck)
                                 }
-                                Button {
-                                    deckToEdit = deck
-                                } label: {
-                                    Label("Rename", systemImage: "pencil")
+                                .buttonStyle(PressableButtonStyle())
+                                .contextMenu {
+                                    Button {
+                                        deckToEdit = deck
+                                    } label: {
+                                        Label("Edit deck", systemImage: "pencil")
+                                    }
+                                    Button(role: .destructive) {
+                                        delete(deck)
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
                                 }
-                                .tint(.orange)
                             }
                         }
+                        .padding(.horizontal, 16)
+                        .padding(.top, 8)
+                        .padding(.bottom, 24)
                     }
+                    .searchable(text: $searchText, prompt: "Search decks")
                 }
             }
             .navigationTitle("Decks")
@@ -52,7 +67,8 @@ struct DeckListView: View {
                     Button {
                         isCreatingDeck = true
                     } label: {
-                        Label("New deck", systemImage: "plus")
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title2)
                     }
                 }
             }
@@ -71,50 +87,58 @@ struct DeckListView: View {
     }
 }
 
-/// One row in the deck list: title, language pair, card count and progress ring.
-struct DeckRowView: View {
+/// A vibrant gradient deck card with title, language pair, counts and progress.
+struct DeckCardView: View {
     let deck: Deck
 
     var body: some View {
-        HStack(spacing: 12) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(deck.title)
-                    .font(.headline)
-
-                Text("\(LanguageCatalog.flag(for: deck.sourceLang)) \(LanguageCatalog.name(for: deck.sourceLang)) → \(LanguageCatalog.flag(for: deck.targetLang)) \(LanguageCatalog.name(for: deck.targetLang))")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-
-                HStack(spacing: 8) {
-                    Text("\(deck.cardCount) cards")
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(deck.title)
+                        .font(.system(.title3, design: .rounded).bold())
+                        .foregroundStyle(.white)
+                        .lineLimit(2)
+                    Text(verbatim: "\(LanguageCatalog.flag(for: deck.sourceLang)) \(LanguageCatalog.name(for: deck.sourceLang))  →  \(LanguageCatalog.flag(for: deck.targetLang)) \(LanguageCatalog.name(for: deck.targetLang))")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.white.opacity(0.85))
+                }
+                Spacer()
+                ProgressRing(value: deck.masteredFraction, lineWidth: 5, gradient: LinearGradient(colors: [.white, .white], startPoint: .top, endPoint: .bottom), showLabel: false)
+                    .frame(width: 40, height: 40)
+                    .overlay(
+                        Text(deck.masteredFraction, format: .percent.precision(.fractionLength(0)))
+                            .font(.system(size: 11, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
+                    )
+            }
 
-                    if deck.dueCount > 0 {
-                        Text("\(deck.dueCount) due")
-                            .font(.caption.bold())
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(.orange.opacity(0.2), in: Capsule())
-                            .foregroundStyle(.orange)
-                    }
+            HStack(spacing: 8) {
+                pill(text: "\(deck.cardCount) cards", systemImage: "rectangle.stack")
+                if deck.dueCount > 0 {
+                    pill(text: "\(deck.dueCount) due", systemImage: "clock")
+                }
+                if !deck.starredCards.isEmpty {
+                    pill(text: "\(deck.starredCards.count)", systemImage: "star.fill")
                 }
             }
-
-            Spacer()
-
-            ZStack {
-                Circle()
-                    .stroke(.quaternary, lineWidth: 5)
-                Circle()
-                    .trim(from: 0, to: deck.masteredFraction)
-                    .stroke(.tint, style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                    .rotationEffect(.degrees(-90))
-                Text(deck.masteredFraction, format: .percent.precision(.fractionLength(0)))
-                    .font(.system(size: 11, weight: .semibold, design: .rounded))
-            }
-            .frame(width: 44, height: 44)
         }
-        .padding(.vertical, 4)
+        .padding(18)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Theme.gradient(for: deck.id), in: RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous))
+        .shadow(color: Theme.gradientColors(for: deck.id).first?.opacity(0.35) ?? .clear, radius: 14, y: 8)
+    }
+
+    private func pill(text: String, systemImage: String) -> some View {
+        HStack(spacing: 4) {
+            Image(systemName: systemImage)
+                .font(.caption2)
+            Text(text)
+                .font(.caption.weight(.semibold))
+        }
+        .foregroundStyle(.white)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 5)
+        .background(.white.opacity(0.2), in: Capsule())
     }
 }

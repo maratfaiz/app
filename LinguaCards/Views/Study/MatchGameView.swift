@@ -7,6 +7,7 @@ struct MatchGameView: View {
     @Environment(\.dismiss) private var dismiss
 
     let deck: Deck
+    var options: StudyOptions = .default
 
     @State private var viewModel: MatchGameViewModel?
 
@@ -35,7 +36,7 @@ struct MatchGameView: View {
         }
         .onAppear {
             if viewModel == nil {
-                viewModel = MatchGameViewModel(deck: deck, modelContext: modelContext)
+                viewModel = MatchGameViewModel(deck: deck, options: options, modelContext: modelContext)
             }
         }
         .onChange(of: viewModel?.mismatchedTileIDs.isEmpty) { _, isEmpty in

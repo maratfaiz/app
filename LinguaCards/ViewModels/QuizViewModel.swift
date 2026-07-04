@@ -9,6 +9,8 @@ final class QuizViewModel {
     struct Question: Identifiable {
         let id = UUID()
         let card: Card
+        let prompt: String
+        let answer: String
         let options: [String]
     }
 
@@ -16,6 +18,7 @@ final class QuizViewModel {
     static let minimumCards = 4
 
     let deck: Deck
+    let options: StudyOptions
     private let modelContext: ModelContext
 
     private(set) var questions: [Question] = []
@@ -25,15 +28,18 @@ final class QuizViewModel {
     /// The option the user picked for the current question, nil while undecided.
     private(set) var selectedOption: String?
 
-    init(deck: Deck, modelContext: ModelContext) {
+    init(deck: Deck, options: StudyOptions = .default, modelContext: ModelContext) {
         self.deck = deck
+        self.options = options
         self.modelContext = modelContext
-        self.questions = Self.makeQuestions(from: deck.cards)
+        self.questions = Self.makeQuestions(from: deck.cards(for: options), direction: options.direction)
     }
 
     var currentQuestion: Question? {
         questions.indices.contains(currentIndex) ? questions[currentIndex] : nil
     }
+
+    var promptLanguage: String { deck.promptLanguage(for: options.direction) }
 
     var isFinished: Bool { currentIndex >= questions.count }
 
@@ -48,7 +54,7 @@ final class QuizViewModel {
         guard !hasAnswered, let question = currentQuestion else { return }
         selectedOption = option
 
-        let isCorrect = option == question.card.back
+        let isCorrect = option == question.answer
         if isCorrect {
             correctCount += 1
             Haptics.success()
@@ -69,7 +75,7 @@ final class QuizViewModel {
     }
 
     func isCorrectOption(_ option: String) -> Bool {
-        option == currentQuestion?.card.back
+        option == currentQuestion?.answer
     }
 
     private func finishSession() {
@@ -84,16 +90,22 @@ final class QuizViewModel {
         try? modelContext.save()
     }
 
-    static func makeQuestions(from cards: [Card]) -> [Question] {
+    static func makeQuestions(from cards: [Card], direction: StudyDirection) -> [Question] {
         guard cards.count >= minimumCards else { return [] }
 
-        return cards.shuffled().map { card in
+        return cards.map { card in
+            let answer = card.answer(for: direction)
             let distractors = cards
-                .filter { $0.id != card.id && $0.back != card.back }
-                .map(\.back)
-                .shuffled()
-            let options = (Array(Set(distractors)).shuffled().prefix(3) + [card.back]).shuffled()
-            return Question(card: card, options: Array(options))
+                .filter { $0.id != card.id }
+                .map { $0.answer(for: direction) }
+                .filter { $0 != answer }
+            let options = (Array(Set(distractors)).shuffled().prefix(3) + [answer]).shuffled()
+            return Question(
+                card: card,
+                prompt: card.prompt(for: direction),
+                answer: answer,
+                options: Array(options)
+            )
         }
     }
 }

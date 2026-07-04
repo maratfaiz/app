@@ -6,6 +6,7 @@ import SwiftData
 @Observable
 final class FlashcardsViewModel {
     let deck: Deck
+    let options: StudyOptions
     private let modelContext: ModelContext
 
     private(set) var cards: [Card]
@@ -14,10 +15,11 @@ final class FlashcardsViewModel {
     private(set) var unknownCount = 0
     var isFlipped = false
 
-    init(deck: Deck, modelContext: ModelContext) {
+    init(deck: Deck, options: StudyOptions = .default, modelContext: ModelContext) {
         self.deck = deck
+        self.options = options
         self.modelContext = modelContext
-        self.cards = deck.cards.shuffled()
+        self.cards = deck.cards(for: options)
     }
 
     var currentCard: Card? {
@@ -38,6 +40,13 @@ final class FlashcardsViewModel {
     func flip() {
         isFlipped.toggle()
         Haptics.tap()
+    }
+
+    func toggleStar() {
+        guard let card = currentCard else { return }
+        card.isStarred.toggle()
+        Haptics.tap()
+        try? modelContext.save()
     }
 
     func mark(known: Bool) {

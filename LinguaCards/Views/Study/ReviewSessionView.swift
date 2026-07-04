@@ -62,8 +62,10 @@ struct ReviewSessionView: View {
 
                 FlipCardView(
                     card: card,
-                    sourceLang: card.deck?.sourceLang ?? "en-US",
-                    targetLang: card.deck?.targetLang ?? "ru-RU",
+                    direction: .termToTranslation,
+                    deckID: card.deck?.id ?? UUID(),
+                    promptLanguage: card.deck?.sourceLang ?? "en-US",
+                    answerLanguage: card.deck?.targetLang ?? "ru-RU",
                     isFlipped: viewModel.isFlipped,
                     onTap: { viewModel.flip() }
                 )

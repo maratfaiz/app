@@ -1,5 +1,6 @@
 import Foundation
 import SwiftData
+import SwiftUI
 
 /// A single flashcard with SM-2 spaced-repetition scheduling state.
 @Model
@@ -19,6 +20,9 @@ final class Card {
     var repetitions: Int
     var nextReview: Date
 
+    /// User-flagged as important; can be studied in a "starred only" set.
+    var isStarred: Bool
+
     var deck: Deck?
 
     init(front: String, back: String, example: String? = nil) {
@@ -30,6 +34,31 @@ final class Card {
         self.interval = 0
         self.repetitions = 0
         self.nextReview = .now
+        self.isStarred = false
+    }
+}
+
+/// Coarse progress bucket used for progress bars and filtering, in the
+/// spirit of Quizlet's "Not studied / Still learning / Mastered".
+enum MasteryLevel: String, CaseIterable {
+    case new
+    case learning
+    case mastered
+
+    var title: LocalizedStringKey {
+        switch self {
+        case .new: return "Not studied"
+        case .learning: return "Still learning"
+        case .mastered: return "Mastered"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .new: return .secondary
+        case .learning: return Theme.warning
+        case .mastered: return Theme.success
+        }
     }
 }
 
@@ -42,6 +71,11 @@ extension Card {
     /// Mastered = answered correctly several times in a row with a mature interval.
     var isMastered: Bool {
         repetitions >= 3 && interval >= 21
+    }
+
+    var masteryLevel: MasteryLevel {
+        if isMastered { return .mastered }
+        return repetitions > 0 ? .learning : .new
     }
 
     var srsState: SRSState {

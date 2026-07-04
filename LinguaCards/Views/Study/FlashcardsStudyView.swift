@@ -7,6 +7,7 @@ struct FlashcardsStudyView: View {
     @Environment(\.dismiss) private var dismiss
 
     let deck: Deck
+    var options: StudyOptions = .default
 
     @State private var viewModel: FlashcardsViewModel?
     @State private var dragOffset = CGSize.zero
@@ -32,7 +33,7 @@ struct FlashcardsStudyView: View {
         }
         .onAppear {
             if viewModel == nil {
-                viewModel = FlashcardsViewModel(deck: deck, modelContext: modelContext)
+                viewModel = FlashcardsViewModel(deck: deck, options: options, modelContext: modelContext)
             }
         }
     }
@@ -44,25 +45,25 @@ struct FlashcardsStudyView: View {
                 correct: viewModel.knownCount,
                 incorrect: viewModel.unknownCount,
                 onRestart: {
-                    self.viewModel = FlashcardsViewModel(deck: deck, modelContext: modelContext)
+                    self.viewModel = FlashcardsViewModel(deck: deck, options: options, modelContext: modelContext)
                 },
                 onDone: { dismiss() }
             )
         } else if let card = viewModel.currentCard {
             VStack(spacing: 20) {
-                ProgressView(value: viewModel.progress)
+                GradientProgressBar(value: viewModel.progress)
                     .padding(.horizontal)
 
                 HStack {
-                    Label("\(viewModel.unknownCount)", systemImage: "xmark.circle")
-                        .foregroundStyle(.red)
+                    Label("\(viewModel.unknownCount)", systemImage: "xmark.circle.fill")
+                        .foregroundStyle(Theme.danger)
                     Spacer()
                     Text("\(viewModel.currentIndex + 1) / \(viewModel.cards.count)")
-                        .font(.subheadline)
+                        .font(.subheadline.weight(.medium))
                         .foregroundStyle(.secondary)
                     Spacer()
-                    Label("\(viewModel.knownCount)", systemImage: "checkmark.circle")
-                        .foregroundStyle(.green)
+                    Label("\(viewModel.knownCount)", systemImage: "checkmark.circle.fill")
+                        .foregroundStyle(Theme.success)
                 }
                 .font(.subheadline.weight(.semibold))
                 .padding(.horizontal, 24)
@@ -71,8 +72,10 @@ struct FlashcardsStudyView: View {
                     if let next = viewModel.nextCard {
                         FlipCardView(
                             card: next,
-                            sourceLang: deck.sourceLang,
-                            targetLang: deck.targetLang,
+                            direction: options.direction,
+                            deckID: deck.id,
+                            promptLanguage: deck.promptLanguage(for: options.direction),
+                            answerLanguage: deck.answerLanguage(for: options.direction),
                             isFlipped: false
                         )
                         .scaleEffect(0.94)
@@ -82,10 +85,13 @@ struct FlashcardsStudyView: View {
 
                     FlipCardView(
                         card: card,
-                        sourceLang: deck.sourceLang,
-                        targetLang: deck.targetLang,
+                        direction: options.direction,
+                        deckID: deck.id,
+                        promptLanguage: deck.promptLanguage(for: options.direction),
+                        answerLanguage: deck.answerLanguage(for: options.direction),
                         isFlipped: viewModel.isFlipped,
-                        onTap: { viewModel.flip() }
+                        onTap: { viewModel.flip() },
+                        onStar: { viewModel.toggleStar() }
                     )
                     .id(card.id)
                     .offset(dragOffset)
@@ -97,23 +103,11 @@ struct FlashcardsStudyView: View {
                 .padding(.horizontal, 24)
 
                 HStack(spacing: 40) {
-                    Button {
+                    circleButton(system: "xmark", tint: Theme.danger) {
                         commitSwipe(viewModel, known: false)
-                    } label: {
-                        Image(systemName: "xmark")
-                            .font(.title2.bold())
-                            .frame(width: 60, height: 60)
-                            .background(.red.opacity(0.15), in: Circle())
-                            .foregroundStyle(.red)
                     }
-                    Button {
+                    circleButton(system: "checkmark", tint: Theme.success) {
                         commitSwipe(viewModel, known: true)
-                    } label: {
-                        Image(systemName: "checkmark")
-                            .font(.title2.bold())
-                            .frame(width: 60, height: 60)
-                            .background(.green.opacity(0.15), in: Circle())
-                            .foregroundStyle(.green)
                     }
                 }
                 .padding(.bottom, 16)
@@ -122,7 +116,17 @@ struct FlashcardsStudyView: View {
         }
     }
 
-    /// "Know" / "Still learning" badge that fades in while dragging.
+    private func circleButton(system: String, tint: Color, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: system)
+                .font(.title2.bold())
+                .frame(width: 64, height: 64)
+                .background(tint.opacity(0.15), in: Circle())
+                .foregroundStyle(tint)
+        }
+        .buttonStyle(PressableButtonStyle())
+    }
+
     @ViewBuilder
     private func swipeBadge(known: Bool) -> some View {
         let visible = known ? dragOffset.width > 30 : dragOffset.width < -30
@@ -130,7 +134,7 @@ struct FlashcardsStudyView: View {
             .font(.headline)
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
-            .background(known ? .green : .red, in: Capsule())
+            .background(known ? Theme.success : Theme.danger, in: Capsule())
             .foregroundStyle(.white)
             .rotationEffect(.degrees(known ? -12 : 12))
             .opacity(visible ? 1 : 0)
@@ -139,18 +143,14 @@ struct FlashcardsStudyView: View {
 
     private func dragGesture(_ viewModel: FlashcardsViewModel) -> some Gesture {
         DragGesture()
-            .onChanged { value in
-                dragOffset = value.translation
-            }
+            .onChanged { value in dragOffset = value.translation }
             .onEnded { value in
                 if value.translation.width > swipeThreshold {
                     commitSwipe(viewModel, known: true)
                 } else if value.translation.width < -swipeThreshold {
                     commitSwipe(viewModel, known: false)
                 } else {
-                    withAnimation(.spring(duration: 0.3)) {
-                        dragOffset = .zero
-                    }
+                    withAnimation(.spring(duration: 0.3)) { dragOffset = .zero }
                 }
             }
     }

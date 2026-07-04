@@ -19,6 +19,20 @@ struct StatsView: View {
         sessions.reduce(0) { $0 + $1.total }
     }
 
+    private var overallBreakdown: [MasteryLevel: Int] {
+        var counts: [MasteryLevel: Int] = [.new: 0, .learning: 0, .mastered: 0]
+        for deck in decks {
+            for (level, count) in deck.masteryBreakdown() {
+                counts[level, default: 0] += count
+            }
+        }
+        return counts
+    }
+
+    private var hasCards: Bool {
+        decks.contains { !$0.cards.isEmpty }
+    }
+
     var body: some View {
         NavigationStack {
             Group {
@@ -31,6 +45,9 @@ struct StatsView: View {
                 } else {
                     List {
                         overviewSection
+                        if hasCards {
+                            masterySection
+                        }
                         activitySection
                         decksSection
                     }
@@ -64,6 +81,13 @@ struct StatsView: View {
             }
             .listRowInsets(EdgeInsets(top: 12, leading: 8, bottom: 12, trailing: 8))
             .listRowBackground(Color.clear)
+        }
+    }
+
+    private var masterySection: some View {
+        Section("Overall progress") {
+            MasteryBar(breakdown: overallBreakdown)
+                .padding(.vertical, 10)
         }
     }
 

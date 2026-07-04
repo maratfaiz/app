@@ -3,10 +3,12 @@ import SwiftData
 
 /// The kind of exercise a study session used.
 enum StudyMode: String, Codable, CaseIterable {
+    case learn
     case flashcards
     case quiz
     case typing
     case match
+    case test
     case review
 }
 

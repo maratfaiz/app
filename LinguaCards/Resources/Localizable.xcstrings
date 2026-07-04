@@ -1,466 +1,1386 @@
 {
-  "sourceLanguage" : "en",
-  "strings" : {
-    "%lld cards" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Карточек: %lld" } }
-      }
-    },
-    "%lld cards are waiting" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Ожидает карточек: %lld" } }
-      }
-    },
-    "%lld cards due" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Карточек к повторению: %lld" } }
-      }
-    },
-    "%lld due" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "%lld к повторению" } }
-      }
-    },
-    "Add another after saving" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Добавить ещё после сохранения" } }
-      }
-    },
-    "Add card" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Добавить карточку" } }
-      }
-    },
-    "Add cards to unlock study modes." : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Добавьте карточки, чтобы открыть режимы обучения." } }
-      }
-    },
-    "Add your first card" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Добавить первую карточку" } }
-      }
-    },
-    "Again" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Снова" } }
-      }
-    },
-    "All caught up!" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Всё повторено!" } }
-      }
-    },
-    "All matched!" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Все пары найдены!" } }
-      }
-    },
-    "Almost! Watch the spelling." : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Почти! Проверьте написание." } }
-      }
-    },
-    "Answers" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Ответы" } }
-      }
-    },
-    "Bulk import" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Массовый импорт" } }
-      }
-    },
-    "By deck" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "По колодам" } }
-      }
-    },
-    "Cancel" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Отмена" } }
-      }
-    },
-    "Cards" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Карточки" } }
-      }
-    },
-    "Check" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Проверить" } }
-      }
-    },
-    "Close" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Закрыть" } }
-      }
-    },
-    "Correct" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Верно" } }
-      }
-    },
-    "Correct!" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Верно!" } }
-      }
-    },
-    "Create a deck" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Создать колоду" } }
-      }
-    },
-    "Create your first deck to start learning new words." : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Создайте первую колоду, чтобы начать учить новые слова." } }
-      }
-    },
-    "Day streak" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Дней подряд" } }
-      }
-    },
-    "Deck" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Колода" } }
-      }
-    },
-    "Decks" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Колоды" } }
-      }
-    },
-    "Delete" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Удалить" } }
-      }
-    },
-    "Description" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Описание" } }
-      }
-    },
-    "Done" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Готово" } }
-      }
-    },
-    "Due today" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "На сегодня" } }
-      }
-    },
-    "Easy" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Легко" } }
-      }
-    },
-    "Edit card" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменить карточку" } }
-      }
-    },
-    "Edit deck" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Изменить колоду" } }
-      }
-    },
-    "Example" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Пример" } }
-      }
-    },
-    "Example sentence (optional)" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Пример предложения (необязательно)" } }
-      }
-    },
-    "Flashcards" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Карточки" } }
-      }
-    },
-    "Good" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Хорошо" } }
-      }
-    },
-    "Hard" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Трудно" } }
-      }
-    },
-    "I don't know" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Не знаю" } }
-      }
-    },
-    "Import" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Импортировать" } }
-      }
-    },
-    "Incorrect" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Неверно" } }
-      }
-    },
-    "Know it" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Знаю" } }
-      }
-    },
-    "Languages" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Языки" } }
-      }
-    },
-    "Last 14 days" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Последние 14 дней" } }
-      }
-    },
-    "Learning" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Учу" } }
-      }
-    },
-    "Mastered" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Выучено" } }
-      }
-    },
-    "Mastery by deck" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Освоение по колодам" } }
-      }
-    },
-    "Match game" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Игра «Пары»" } }
-      }
-    },
-    "Mistakes: %lld" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Ошибок: %lld" } }
-      }
-    },
-    "More" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Ещё" } }
-      }
-    },
-    "Multiple choice" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Выбор ответа" } }
-      }
-    },
-    "Needs at least 3 cards" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Нужно минимум 3 карточки" } }
-      }
-    },
-    "Needs at least 4 cards" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Нужно минимум 4 карточки" } }
-      }
-    },
-    "New card" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Новая карточка" } }
-      }
-    },
-    "New deck" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Новая колода" } }
-      }
-    },
-    "Next" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Далее" } }
-      }
-    },
-    "No cards are due for review right now. Come back later." : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сейчас нет карточек для повторения. Загляните позже." } }
-      }
-    },
-    "No cards are due for review today. Great job staying on schedule." : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сегодня нет карточек для повторения. Отличная работа!" } }
-      }
-    },
-    "No decks yet" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Пока нет колод" } }
-      }
-    },
-    "No decks yet." : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Колод пока нет." } }
-      }
-    },
-    "No stats yet" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Статистики пока нет" } }
-      }
-    },
-    "One card per line, for example:" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Одна карточка на строку, например:" } }
-      }
-    },
-    "Pair terms with translations" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Соедините слова с переводами" } }
-      }
-    },
-    "Pick the right translation" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Выберите правильный перевод" } }
-      }
-    },
-    "Play again" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Играть ещё раз" } }
-      }
-    },
-    "Pronounce" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Озвучить" } }
-      }
-    },
-    "Recognized cards: %lld" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Распознано карточек: %lld" } }
-      }
-    },
-    "Rename" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Переименовать" } }
-      }
-    },
-    "Review" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Повторение" } }
-      }
-    },
-    "Review due cards" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Повторить карточки" } }
-      }
-    },
-    "Review everything" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Повторить всё" } }
-      }
-    },
-    "Review today" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Повторить сегодня" } }
-      }
-    },
-    "Save" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сохранить" } }
-      }
-    },
-    "Session complete!" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Занятие завершено!" } }
-      }
-    },
-    "Sessions" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Занятия" } }
-      }
-    },
-    "Show answer" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Показать ответ" } }
-      }
-    },
-    "Stats" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Статистика" } }
-      }
-    },
-    "Study" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Учить" } }
-      }
-    },
-    "Study a deck and your progress will show up here." : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Позанимайтесь с колодой, и здесь появится ваш прогресс." } }
-      }
-    },
-    "Study again" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Повторить ещё раз" } }
-      }
-    },
-    "Swipe right if you know it" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Свайп вправо, если знаете" } }
-      }
-    },
-    "Term" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Термин" } }
-      }
-    },
-    "Term language" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Язык терминов" } }
-      }
-    },
-    "This deck is empty." : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "В этой колоде пусто." } }
-      }
-    },
-    "Title" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Название" } }
-      }
-    },
-    "Translation" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Перевод" } }
-      }
-    },
-    "Translation language" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Язык переводов" } }
-      }
-    },
-    "Type the translation" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Введите перевод" } }
-      }
-    },
-    "Type the translation of" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Введите перевод слова" } }
-      }
-    },
-    "Typing test" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Ввод слова" } }
-      }
-    },
-    "What is the translation of" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Как переводится" } }
-      }
+  "sourceLanguage": "en",
+  "strings": {
+    "%lld cards": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Карточек: %lld"
+          }
+        }
+      }
+    },
+    "%lld cards are ready": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld карточек готово"
+          }
+        }
+      }
+    },
+    "%lld cards are waiting": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ожидает карточек: %lld"
+          }
+        }
+      }
+    },
+    "%lld cards due": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Карточек к повторению: %lld"
+          }
+        }
+      }
+    },
+    "%lld due": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld к повторению"
+          }
+        }
+      }
+    },
+    "%lld left": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld осталось"
+          }
+        }
+      }
+    },
+    "%lld mastered": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld освоено"
+          }
+        }
+      }
+    },
+    "%lld of %lld answered": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отвечено %lld из %lld"
+          }
+        }
+      }
+    },
+    "Adaptive, mastery-based study": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Адаптивное изучение до усвоения"
+          }
+        }
+      }
+    },
+    "Add": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добавить"
+          }
+        }
+      }
     },
-    "Your answer" : {
-      "localizations" : {
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Ваш ответ" } }
+    "Add another after saving": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добавить ещё после сохранения"
+          }
+        }
+      }
+    },
+    "Add card": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добавить карточку"
+          }
+        }
+      }
+    },
+    "Add cards or import a list to start studying.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добавьте карточки или импортируйте список, чтобы начать."
+          }
+        }
+      }
+    },
+    "Add cards to unlock study modes.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добавьте карточки, чтобы открыть режимы обучения."
+          }
+        }
+      }
+    },
+    "Add your first card": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добавить первую карточку"
+          }
+        }
+      }
+    },
+    "Again": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Снова"
+          }
+        }
+      }
+    },
+    "All caught up!": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Всё повторено!"
+          }
+        }
+      }
+    },
+    "All matched!": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Все пары найдены!"
+          }
+        }
+      }
+    },
+    "Almost! Watch the spelling.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Почти! Проверьте написание."
+          }
+        }
+      }
+    },
+    "Answer": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ответ"
+          }
+        }
+      }
+    },
+    "Answer: %@": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ответ: %@"
+          }
+        }
+      }
+    },
+    "Answers": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ответы"
+          }
+        }
+      }
+    },
+    "Bulk import": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Массовый импорт"
+          }
+        }
+      }
+    },
+    "By deck": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "По колодам"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отмена"
+          }
+        }
+      }
+    },
+    "Cards": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Карточки"
+          }
+        }
+      }
+    },
+    "Check": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Проверить"
+          }
+        }
+      }
+    },
+    "Choose the correct translation": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Выберите правильный перевод"
+          }
+        }
+      }
+    },
+    "Close": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Закрыть"
+          }
+        }
+      }
+    },
+    "Continue": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Продолжить"
+          }
+        }
+      }
+    },
+    "Correct": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Верно"
+          }
+        }
+      }
+    },
+    "Correct!": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Верно!"
+          }
+        }
+      }
+    },
+    "Create a deck": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Создать колоду"
+          }
+        }
+      }
+    },
+    "Create your first deck to start learning new words.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Создайте первую колоду, чтобы начать учить новые слова."
+          }
+        }
+      }
+    },
+    "Day streak": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дней подряд"
+          }
+        }
+      }
+    },
+    "Deck": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Колода"
+          }
+        }
+      }
+    },
+    "Decks": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Колоды"
+          }
+        }
+      }
+    },
+    "Delete": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Удалить"
+          }
+        }
+      }
+    },
+    "Description": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Описание"
+          }
+        }
+      }
+    },
+    "Done": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Готово"
+          }
+        }
+      }
+    },
+    "Due": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Срок"
+          }
+        }
+      }
+    },
+    "Due today": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "На сегодня"
+          }
+        }
+      }
+    },
+    "Easy": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Легко"
+          }
+        }
+      }
+    },
+    "Edit card": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изменить карточку"
+          }
+        }
+      }
+    },
+    "Edit deck": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изменить колоду"
+          }
+        }
+      }
+    },
+    "Example": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пример"
+          }
+        }
+      }
+    },
+    "Example sentence (optional)": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пример предложения (необязательно)"
+          }
+        }
+      }
+    },
+    "False": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Неверно"
+          }
+        }
+      }
+    },
+    "Flashcards": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Карточки"
+          }
+        }
+      }
+    },
+    "Flip and swipe through cards": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Листайте и переворачивайте карточки"
+          }
+        }
+      }
+    },
+    "Get started": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Начать"
+          }
+        }
+      }
+    },
+    "Good": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Хорошо"
+          }
+        }
+      }
+    },
+    "Great job!": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отличная работа!"
+          }
+        }
+      }
+    },
+    "Great work!": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отличная работа!"
+          }
+        }
+      }
+    },
+    "Hard": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Трудно"
+          }
+        }
+      }
+    },
+    "I don't know": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не знаю"
+          }
+        }
+      }
+    },
+    "Import": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Импортировать"
+          }
+        }
+      }
+    },
+    "Incorrect": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Неверно"
+          }
+        }
+      }
+    },
+    "Keep going!": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Так держать!"
+          }
+        }
+      }
+    },
+    "Know it": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Знаю"
+          }
+        }
+      }
+    },
+    "Languages": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Языки"
+          }
+        }
+      }
+    },
+    "Last 14 days": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Последние 14 дней"
+          }
+        }
+      }
+    },
+    "Learn": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изучение"
+          }
+        }
+      }
+    },
+    "Learn any language with beautiful flashcards and proven study modes.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Учите любой язык с красивыми карточками и проверенными режимами."
+          }
+        }
+      }
+    },
+    "Learn, Flashcards, Write, Match and Test — pick the mode that fits the moment.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изучение, Карточки, Письмо, Пары и Тест — выбирайте подходящий режим."
+          }
+        }
+      }
+    },
+    "Learning": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Учу"
+          }
+        }
+      }
+    },
+    "Mastered": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Выучено"
+          }
+        }
+      }
+    },
+    "Mastery by deck": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Освоение по колодам"
+          }
+        }
+      }
+    },
+    "Match": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пары"
+          }
+        }
+      }
+    },
+    "Match game": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Игра «Пары»"
+          }
+        }
+      }
+    },
+    "Mistakes: %lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ошибок: %lld"
+          }
+        }
+      }
+    },
+    "Mixed questions, graded": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Смешанные вопросы с оценкой"
+          }
+        }
+      }
+    },
+    "More": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ещё"
+          }
+        }
+      }
+    },
+    "Multiple choice": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Выбор ответа"
+          }
+        }
+      }
+    },
+    "Needs at least 3 cards": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нужно минимум 3 карточки"
+          }
+        }
+      }
+    },
+    "Needs at least 4 cards": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нужно минимум 4 карточки"
+          }
+        }
+      }
+    },
+    "New card": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Новая карточка"
+          }
+        }
+      }
+    },
+    "New deck": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Новая колода"
+          }
+        }
+      }
+    },
+    "Next": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Далее"
+          }
+        }
+      }
+    },
+    "No cards are due for review right now. Come back later.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сейчас нет карточек для повторения. Загляните позже."
+          }
+        }
+      }
+    },
+    "No cards are due for review today. Great job staying on schedule.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сегодня нет карточек для повторения. Отличная работа!"
+          }
+        }
+      }
+    },
+    "No decks yet": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пока нет колод"
+          }
+        }
+      }
+    },
+    "No decks yet.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Колод пока нет."
+          }
+        }
+      }
+    },
+    "No stats yet": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Статистики пока нет"
+          }
+        }
+      }
+    },
+    "Not studied": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не изучено"
+          }
+        }
+      }
+    },
+    "One card per line, for example:": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Одна карточка на строку, например:"
+          }
+        }
+      }
+    },
+    "Outstanding!": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Великолепно!"
+          }
+        }
+      }
+    },
+    "Overall progress": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Общий прогресс"
+          }
+        }
+      }
+    },
+    "Pair terms with translations": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Соедините слова с переводами"
+          }
+        }
+      }
+    },
+    "Pair terms, against the clock": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Соединяйте пары на время"
+          }
+        }
+      }
+    },
+    "Pick the right translation": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Выберите правильный перевод"
+          }
+        }
+      }
+    },
+    "Play again": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Играть ещё раз"
+          }
+        }
+      }
+    },
+    "Practice makes perfect": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Практика ведёт к совершенству"
+          }
+        }
+      }
+    },
+    "Pronounce": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Озвучить"
+          }
+        }
+      }
+    },
+    "Question %lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вопрос %lld"
+          }
+        }
+      }
+    },
+    "Recognized cards: %lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Распознано карточек: %lld"
+          }
+        }
+      }
+    },
+    "Remember for good": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запоминайте навсегда"
+          }
+        }
+      }
+    },
+    "Rename": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Переименовать"
+          }
+        }
+      }
+    },
+    "Review": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повторение"
+          }
+        }
+      }
+    },
+    "Review due cards": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повторить карточки"
+          }
+        }
+      }
+    },
+    "Review everything": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повторить всё"
+          }
+        }
+      }
+    },
+    "Review the misses below": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Разберите ошибки ниже"
+          }
+        }
+      }
+    },
+    "Review today": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повторить сегодня"
+          }
+        }
+      }
+    },
+    "Save": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сохранить"
+          }
+        }
+      }
+    },
+    "Search decks": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поиск колод"
+          }
+        }
+      }
+    },
+    "Session complete!": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Занятие завершено!"
+          }
+        }
+      }
+    },
+    "Sessions": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Занятия"
+          }
+        }
+      }
+    },
+    "Show answer": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показать ответ"
+          }
+        }
+      }
+    },
+    "Spaced repetition schedules each card so you review right before you'd forget.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Интервальные повторения показывают карточку прямо перед тем, как вы её забудете."
+          }
+        }
+      }
+    },
+    "Starred cards only (%lld)": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Только избранные (%lld)"
+          }
+        }
+      }
+    },
+    "Stats": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Статистика"
+          }
+        }
+      }
+    },
+    "Still learning": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изучается"
+          }
+        }
+      }
+    },
+    "Streak": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Серия"
+          }
+        }
+      }
+    },
+    "Study": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Учить"
+          }
+        }
+      }
+    },
+    "Study a deck and your progress will show up here.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Позанимайтесь с колодой, и здесь появится ваш прогресс."
+          }
+        }
+      }
+    },
+    "Study again": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повторить ещё раз"
+          }
+        }
+      }
+    },
+    "Study your way": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Учитесь по-своему"
+          }
+        }
+      }
+    },
+    "Submit test": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Завершить тест"
+          }
+        }
+      }
+    },
+    "Swipe right if you know it": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Свайп вправо, если знаете"
+          }
+        }
+      }
+    },
+    "Tap to flip": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нажмите, чтобы перевернуть"
+          }
+        }
+      }
+    },
+    "Term": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Термин"
+          }
+        }
+      }
+    },
+    "Term language": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Язык терминов"
+          }
+        }
+      }
+    },
+    "Test": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тест"
+          }
+        }
+      }
+    },
+    "This deck is empty": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В этой колоде пусто"
+          }
+        }
+      }
+    },
+    "This deck is empty.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В этой колоде пусто."
+          }
+        }
+      }
+    },
+    "Title": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Название"
+          }
+        }
+      }
+    },
+    "Translation": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевод"
+          }
+        }
+      }
+    },
+    "Translation language": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Язык переводов"
+          }
+        }
+      }
+    },
+    "True": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Верно"
+          }
+        }
+      }
+    },
+    "Type the translation": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Введите перевод"
+          }
+        }
+      }
+    },
+    "Type the translation of": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Введите перевод слова"
+          }
+        }
+      }
+    },
+    "Type your answer": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Введите ответ"
+          }
+        }
+      }
+    },
+    "Typing test": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ввод слова"
+          }
+        }
+      }
+    },
+    "Welcome to LinguaCards": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добро пожаловать в LinguaCards"
+          }
+        }
+      }
+    },
+    "What is the translation of": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Как переводится"
+          }
+        }
+      }
+    },
+    "Write": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Письмо"
+          }
+        }
+      }
+    },
+    "Your answer": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваш ответ"
+          }
+        }
+      }
+    },
+    "score": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "результат"
+          }
+        }
       }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

@@ -19,6 +19,7 @@ final class MatchGameViewModel {
     static let minimumCards = 3
 
     let deck: Deck
+    let options: StudyOptions
     private let modelContext: ModelContext
 
     private(set) var tiles: [Tile] = []
@@ -29,8 +30,9 @@ final class MatchGameViewModel {
     private(set) var startedAt = Date.now
     private(set) var finishedAt: Date?
 
-    init(deck: Deck, modelContext: ModelContext) {
+    init(deck: Deck, options: StudyOptions = .default, modelContext: ModelContext) {
         self.deck = deck
+        self.options = options
         self.modelContext = modelContext
         startNewRound()
     }
@@ -50,7 +52,7 @@ final class MatchGameViewModel {
     }
 
     func startNewRound() {
-        let chosen = Array(deck.cards.shuffled().prefix(Self.pairCount))
+        let chosen = Array(deck.cards(for: options).prefix(Self.pairCount))
         var newTiles: [Tile] = []
         for card in chosen {
             newTiles.append(Tile(cardID: card.id, text: card.front, isTerm: true))

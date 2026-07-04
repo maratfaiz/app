@@ -50,6 +50,19 @@ extension Deck {
         cards.filter(\.isMastered).count
     }
 
+    var starredCards: [Card] {
+        cards.filter(\.isStarred)
+    }
+
+    /// Number of cards in each mastery bucket, for progress bars.
+    func masteryBreakdown() -> [MasteryLevel: Int] {
+        var counts: [MasteryLevel: Int] = [.new: 0, .learning: 0, .mastered: 0]
+        for card in cards {
+            counts[card.masteryLevel, default: 0] += 1
+        }
+        return counts
+    }
+
     /// Fraction of cards considered mastered, in 0...1.
     var masteredFraction: Double {
         guard !cards.isEmpty else { return 0 }

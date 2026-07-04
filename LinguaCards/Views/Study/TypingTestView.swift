@@ -1,12 +1,13 @@
 import SwiftUI
 import SwiftData
 
-/// Typing test: the term is shown, the user types the translation.
+/// Write mode: the prompt is shown, the user types the answer.
 struct TypingTestView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
     let deck: Deck
+    var options: StudyOptions = .default
 
     @State private var viewModel: TypingTestViewModel?
     @FocusState private var inputFocused: Bool
@@ -20,7 +21,7 @@ struct TypingTestView: View {
                     ProgressView()
                 }
             }
-            .navigationTitle("Typing test")
+            .navigationTitle("Write")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -30,7 +31,7 @@ struct TypingTestView: View {
         }
         .onAppear {
             if viewModel == nil {
-                viewModel = TypingTestViewModel(deck: deck, modelContext: modelContext)
+                viewModel = TypingTestViewModel(deck: deck, options: options, modelContext: modelContext)
             }
         }
     }
@@ -42,13 +43,13 @@ struct TypingTestView: View {
                 correct: viewModel.correctCount,
                 incorrect: viewModel.incorrectCount,
                 onRestart: {
-                    self.viewModel = TypingTestViewModel(deck: deck, modelContext: modelContext)
+                    self.viewModel = TypingTestViewModel(deck: deck, options: options, modelContext: modelContext)
                 },
                 onDone: { dismiss() }
             )
         } else if let card = viewModel.currentCard {
             VStack(spacing: 24) {
-                ProgressView(value: viewModel.progress)
+                GradientProgressBar(value: viewModel.progress)
                     .padding(.horizontal)
 
                 Spacer()
@@ -59,11 +60,11 @@ struct TypingTestView: View {
                         .foregroundStyle(.secondary)
 
                     HStack(spacing: 12) {
-                        Text(card.front)
+                        Text(viewModel.promptText)
                             .font(.system(.largeTitle, design: .rounded).weight(.bold))
                             .multilineTextAlignment(.center)
                             .minimumScaleFactor(0.5)
-                        SpeakerButton(text: card.front, language: deck.sourceLang, font: .title2)
+                        SpeakerButton(text: viewModel.promptText, language: viewModel.promptLanguage, font: .title2)
                     }
 
                     if let example = card.example, !example.isEmpty {
@@ -76,19 +77,24 @@ struct TypingTestView: View {
                 .padding(.horizontal, 24)
 
                 TextField("Your answer", text: Bindable(viewModel).input)
-                    .textFieldStyle(.roundedBorder)
+                    .textFieldStyle(.plain)
                     .font(.title3)
+                    .multilineTextAlignment(.center)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .focused($inputFocused)
                     .submitLabel(.done)
-                    .onSubmit {
-                        viewModel.submit()
-                    }
+                    .onSubmit { viewModel.submit() }
                     .disabled(viewModel.phase != .answering)
+                    .padding()
+                    .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            .strokeBorder(fieldBorder(viewModel), lineWidth: 1.5)
+                    )
                     .padding(.horizontal, 24)
 
-                feedback(viewModel, card: card)
+                feedback(viewModel)
 
                 Spacer()
 
@@ -99,8 +105,17 @@ struct TypingTestView: View {
         }
     }
 
+    private func fieldBorder(_ viewModel: TypingTestViewModel) -> Color {
+        switch viewModel.phase {
+        case .answering: return .clear
+        case .feedback(.correct): return Theme.success
+        case .feedback(.almostCorrect): return Theme.warning
+        case .feedback(.wrong): return Theme.danger
+        }
+    }
+
     @ViewBuilder
-    private func feedback(_ viewModel: TypingTestViewModel, card: Card) -> some View {
+    private func feedback(_ viewModel: TypingTestViewModel) -> some View {
         switch viewModel.phase {
         case .answering:
             EmptyView()
@@ -108,25 +123,20 @@ struct TypingTestView: View {
             VStack(spacing: 8) {
                 switch verdict {
                 case .correct:
-                    Label("Correct!", systemImage: "checkmark.circle.fill")
-                        .foregroundStyle(.green)
-                        .font(.headline)
+                    Label("Correct!", systemImage: "checkmark.circle.fill").foregroundStyle(Theme.success)
                 case .almostCorrect:
-                    Label("Almost! Watch the spelling.", systemImage: "checkmark.circle.badge.questionmark")
-                        .foregroundStyle(.orange)
-                        .font(.headline)
+                    Label("Almost! Watch the spelling.", systemImage: "checkmark.circle.badge.questionmark").foregroundStyle(Theme.warning)
                 case .wrong:
-                    Label("Incorrect", systemImage: "xmark.circle.fill")
-                        .foregroundStyle(.red)
-                        .font(.headline)
+                    Label("Incorrect", systemImage: "xmark.circle.fill").foregroundStyle(Theme.danger)
                 }
 
                 HStack(spacing: 8) {
-                    Text(card.back)
+                    Text(viewModel.expectedAnswer)
                         .font(.title3.weight(.semibold))
-                    SpeakerButton(text: card.back, language: deck.targetLang)
+                    SpeakerButton(text: viewModel.expectedAnswer, language: viewModel.answerLanguage)
                 }
             }
+            .font(.headline)
             .padding(.horizontal, 24)
         }
     }
@@ -135,36 +145,21 @@ struct TypingTestView: View {
     private func controls(_ viewModel: TypingTestViewModel) -> some View {
         VStack(spacing: 10) {
             if viewModel.phase == .answering {
-                Button {
+                PrimaryButton(title: "Check", systemImage: "checkmark") {
                     viewModel.submit()
-                } label: {
-                    Text("Check")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
                 .disabled(viewModel.input.trimmingCharacters(in: .whitespaces).isEmpty)
 
-                Button {
+                Button("I don't know") {
                     viewModel.reveal()
-                } label: {
-                    Text("I don't know")
-                        .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.bordered)
-                .controlSize(.large)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
             } else {
-                Button {
+                PrimaryButton(title: "Next", systemImage: "arrow.right") {
                     viewModel.advance()
                     inputFocused = true
-                } label: {
-                    Text("Next")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
             }
         }
         .padding(.horizontal, 24)
