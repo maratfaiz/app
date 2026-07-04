@@ -3,6 +3,69 @@ import Foundation
 /// Pure helpers for streaks and aggregated study statistics.
 enum StatsService {
 
+    /// One day in the study heatmap (GitHub-contribution-style calendar).
+    struct HeatCell: Identifiable, Equatable {
+        let date: Date
+        let count: Int
+        var id: Date { date }
+
+        /// Intensity bucket 0...4 for coloring.
+        var level: Int {
+            switch count {
+            case 0: return 0
+            case 1...4: return 1
+            case 5...9: return 2
+            case 10...19: return 3
+            default: return 4
+            }
+        }
+    }
+
+    /// The week-aligned list of days shown in the heatmap, ending today and
+    /// starting on the first day of a week so columns are clean. Pure and
+    /// testable — no sessions involved.
+    static func heatmapDays(
+        weeks: Int = 16,
+        calendar: Calendar = .current,
+        today: Date = .now
+    ) -> [Date] {
+        let end = calendar.startOfDay(for: today)
+        guard let rawStart = calendar.date(byAdding: .day, value: -(weeks * 7 - 1), to: end) else {
+            return []
+        }
+        let weekday = calendar.component(.weekday, from: rawStart)
+        let offset = (weekday - calendar.firstWeekday + 7) % 7
+        guard let start = calendar.date(byAdding: .day, value: -offset, to: rawStart) else {
+            return []
+        }
+
+        var days: [Date] = []
+        var cursor = start
+        while cursor <= end {
+            days.append(cursor)
+            guard let next = calendar.date(byAdding: .day, value: 1, to: cursor) else { break }
+            cursor = next
+        }
+        return days
+    }
+
+    /// A day-aligned grid of study activity for the last `weeks` weeks, ending
+    /// today, with answer counts tallied per day.
+    static func studyHeatmap(
+        sessions: [StudySession],
+        weeks: Int = 16,
+        calendar: Calendar = .current,
+        today: Date = .now
+    ) -> [HeatCell] {
+        var counts: [Date: Int] = [:]
+        for session in sessions {
+            let day = calendar.startOfDay(for: session.date)
+            counts[day, default: 0] += session.total
+        }
+        return heatmapDays(weeks: weeks, calendar: calendar, today: today)
+            .map { HeatCell(date: $0, count: counts[$0] ?? 0) }
+    }
+
     /// Number of consecutive calendar days with at least one session,
     /// counting back from today. A streak is still "alive" if the most
     /// recent session was yesterday (today's studying just hasn't happened yet).

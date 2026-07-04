@@ -48,6 +48,7 @@ struct StatsView: View {
                         if hasCards {
                             masterySection
                         }
+                        heatmapSection
                         activitySection
                         decksSection
                     }
@@ -90,6 +91,13 @@ struct StatsView: View {
         Section("Overall progress") {
             MasteryBar(breakdown: overallBreakdown)
                 .padding(.vertical, 10)
+        }
+    }
+
+    private var heatmapSection: some View {
+        Section("Study activity") {
+            StudyHeatmap(cells: StatsService.studyHeatmap(sessions: sessions))
+                .padding(.vertical, 8)
         }
     }
 
