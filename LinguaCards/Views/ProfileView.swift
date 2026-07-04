@@ -14,6 +14,18 @@ struct ProfileView: View {
     private var totalCards: Int { decks.reduce(0) { $0 + $1.cardCount } }
     private var totalMastered: Int { decks.reduce(0) { $0 + $1.masteredCount } }
     private var streak: Int { StatsService.streak(sessionDates: sessions.map(\.date)) }
+    private var totalAnswers: Int { sessions.reduce(0) { $0 + $1.total } }
+
+    private var learnerStats: LearnerStats {
+        LearnerStats(
+            deckCount: decks.count,
+            totalCards: totalCards,
+            masteredCount: totalMastered,
+            streak: streak,
+            totalAnswers: totalAnswers,
+            sharedDecks: community.published.count
+        )
+    }
 
     var body: some View {
         NavigationStack {
@@ -21,6 +33,9 @@ struct ProfileView: View {
                 VStack(spacing: 20) {
                     headerCard
                     statsRow
+                    AchievementsSection(stats: learnerStats)
+                        .padding(16)
+                        .cardSurface(padding: 0)
                     publishedSection
                     NavigationLink {
                         StatsView()
