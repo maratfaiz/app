@@ -19,6 +19,8 @@ struct LinguaCardsApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environment(ProfileStore.shared)
+                .environment(CommunityStore.shared)
         }
         .modelContainer(container)
     }

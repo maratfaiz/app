@@ -4,6 +4,8 @@ import SwiftData
 /// One deck: gradient header, study options, the study-mode grid and cards.
 struct DeckDetailView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(ProfileStore.self) private var profile
+    @Environment(CommunityStore.self) private var community
     let deck: Deck
 
     @State private var isAddingCard = false
@@ -12,6 +14,7 @@ struct DeckDetailView: View {
     @State private var isEditingDeck = false
     @State private var activeStudyMode: StudyMode?
     @State private var options = StudyOptions.default
+    @State private var didPublish = false
 
     private var studyableCount: Int {
         options.starredOnly ? deck.starredCards.count : deck.cardCount
@@ -46,6 +49,13 @@ struct DeckDetailView: View {
                     Button { isAddingCard = true } label: { Label("Add card", systemImage: "plus") }
                     Button { isImporting = true } label: { Label("Bulk import", systemImage: "square.and.arrow.down.on.square") }
                     Button { isEditingDeck = true } label: { Label("Edit deck", systemImage: "pencil") }
+                    if !deck.cards.isEmpty {
+                        Divider()
+                        Button { publish() } label: {
+                            Label(community.isPublished(deck) ? "Shared to community" : "Share to community", systemImage: "globe")
+                        }
+                        .disabled(community.isPublished(deck))
+                    }
                 } label: {
                     Image(systemName: "ellipsis.circle")
                 }
@@ -58,6 +68,17 @@ struct DeckDetailView: View {
         .fullScreenCover(item: $activeStudyMode) { mode in
             studyDestination(for: mode)
         }
+        .alert("Shared to community", isPresented: $didPublish) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("“\(deck.title)” is now in Explore for others to discover.")
+        }
+    }
+
+    private func publish() {
+        community.publish(deck, author: profile)
+        Haptics.success()
+        didPublish = true
     }
 
     // MARK: - Header

@@ -81,6 +81,16 @@
         }
       }
     },
+    "%lld terms": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld терминов"
+          }
+        }
+      }
+    },
     "Adaptive, mastery-based study": {
       "localizations": {
         "ru": {
@@ -141,12 +151,32 @@
         }
       }
     },
+    "Add to my decks": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добавить в мои колоды"
+          }
+        }
+      }
+    },
     "Add your first card": {
       "localizations": {
         "ru": {
           "stringUnit": {
             "state": "translated",
             "value": "Добавить первую карточку"
+          }
+        }
+      }
+    },
+    "Added to your library": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добавлено в библиотеку"
           }
         }
       }
@@ -217,6 +247,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ответы"
+          }
+        }
+      }
+    },
+    "Avatar color": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Цвет аватара"
+          }
+        }
+      }
+    },
+    "Bio": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "О себе"
           }
         }
       }
@@ -327,6 +377,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Создать колоду"
+          }
+        }
+      }
+    },
+    "Create account": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Создать аккаунт"
+          }
+        }
+      }
+    },
+    "Create your account": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Создайте аккаунт"
           }
         }
       }
@@ -451,6 +521,26 @@
         }
       }
     },
+    "Edit profile": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изменить профиль"
+          }
+        }
+      }
+    },
+    "Emoji (optional)": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Эмодзи (необязательно)"
+          }
+        }
+      }
+    },
     "Example": {
       "localizations": {
         "ru": {
@@ -467,6 +557,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Пример предложения (необязательно)"
+          }
+        }
+      }
+    },
+    "Explore": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Обзор"
           }
         }
       }
@@ -661,6 +761,16 @@
         }
       }
     },
+    "Library": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Библиотека"
+          }
+        }
+      }
+    },
     "Mastered": {
       "localizations": {
         "ru": {
@@ -737,6 +847,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Выбор ответа"
+          }
+        }
+      }
+    },
+    "Name": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Имя"
           }
         }
       }
@@ -861,6 +981,16 @@
         }
       }
     },
+    "Open a deck and tap Share to publish it.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Откройте колоду и нажмите «Поделиться»."
+          }
+        }
+      }
+    },
     "Outstanding!": {
       "localizations": {
         "ru": {
@@ -921,12 +1051,42 @@
         }
       }
     },
+    "Popular this week": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Популярное за неделю"
+          }
+        }
+      }
+    },
     "Practice makes perfect": {
       "localizations": {
         "ru": {
           "stringUnit": {
             "state": "translated",
             "value": "Практика ведёт к совершенству"
+          }
+        }
+      }
+    },
+    "Preview": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Предпросмотр"
+          }
+        }
+      }
+    },
+    "Profile": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Профиль"
           }
         }
       }
@@ -1041,12 +1201,32 @@
         }
       }
     },
+    "Say something about your learning": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Расскажите о своём обучении"
+          }
+        }
+      }
+    },
     "Search decks": {
       "localizations": {
         "ru": {
           "stringUnit": {
             "state": "translated",
             "value": "Поиск колод"
+          }
+        }
+      }
+    },
+    "Search decks, subjects, people": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поиск колод, тем, людей"
           }
         }
       }
@@ -1071,12 +1251,42 @@
         }
       }
     },
+    "Share to community": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поделиться с сообществом"
+          }
+        }
+      }
+    },
+    "Shared to community": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Опубликовано в сообществе"
+          }
+        }
+      }
+    },
     "Show answer": {
       "localizations": {
         "ru": {
           "stringUnit": {
             "state": "translated",
             "value": "Показать ответ"
+          }
+        }
+      }
+    },
+    "Skip": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пропустить"
           }
         }
       }
@@ -1331,6 +1541,26 @@
         }
       }
     },
+    "Username": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Имя пользователя"
+          }
+        }
+      }
+    },
+    "View full stats": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вся статистика"
+          }
+        }
+      }
+    },
     "Welcome to LinguaCards": {
       "localizations": {
         "ru": {
@@ -1361,12 +1591,32 @@
         }
       }
     },
+    "You haven't shared any decks yet.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вы ещё не поделились ни одной колодой."
+          }
+        }
+      }
+    },
     "Your answer": {
       "localizations": {
         "ru": {
           "stringUnit": {
             "state": "translated",
             "value": "Ваш ответ"
+          }
+        }
+      }
+    },
+    "Your name": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваше имя"
           }
         }
       }

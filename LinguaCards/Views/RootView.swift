@@ -1,8 +1,9 @@
 import SwiftUI
 import SwiftData
 
-/// Top-level tab navigation, gated behind first-launch onboarding.
+/// Top-level tab navigation, gated behind first-launch onboarding and account setup.
 struct RootView: View {
+    @Environment(ProfileStore.self) private var profile
     @Query private var decks: [Deck]
     @AppStorage("com.linguacards.didOnboard") private var didOnboard = false
 
@@ -14,7 +15,10 @@ struct RootView: View {
         ZStack {
             TabView {
                 DeckListView()
-                    .tabItem { Label("Decks", systemImage: "rectangle.stack.fill") }
+                    .tabItem { Label("Library", systemImage: "rectangle.stack.fill") }
+
+                CommunityView()
+                    .tabItem { Label("Explore", systemImage: "globe") }
 
                 ReviewTodayView()
                     .tabItem { Label("Review", systemImage: "clock.fill") }
@@ -22,15 +26,30 @@ struct RootView: View {
 
                 StatsView()
                     .tabItem { Label("Stats", systemImage: "chart.bar.fill") }
+
+                ProfileView()
+                    .tabItem { Label("Profile", systemImage: "person.crop.circle.fill") }
             }
             .tint(Theme.primary)
 
             if !didOnboard {
                 OnboardingView { didOnboard = true }
                     .transition(.opacity)
-                    .zIndex(1)
+                    .zIndex(2)
             }
         }
         .animation(.easeInOut, value: didOnboard)
+        .fullScreenCover(isPresented: needsAccount) {
+            AccountSetupView(isCreating: true)
+                .environment(profile)
+        }
+    }
+
+    /// Show account creation once onboarding is done and no account exists yet.
+    private var needsAccount: Binding<Bool> {
+        Binding(
+            get: { didOnboard && !profile.hasAccount },
+            set: { _ in }
+        )
     }
 }
