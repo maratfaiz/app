@@ -80,6 +80,7 @@ struct ReviewTodayView: View {
                     }
                 }
             }
+            .auroraBackground()
             .navigationTitle("Review today")
             .fullScreenCover(item: $reviewTarget) { target in
                 ReviewSessionView(decks: target.decks)

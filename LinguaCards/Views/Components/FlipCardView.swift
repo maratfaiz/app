@@ -5,7 +5,7 @@ import SwiftUI
 struct FlipCardView: View {
     let card: Card
     let direction: StudyDirection
-    let deckID: UUID
+    let colorIndex: Int
     let promptLanguage: String
     let answerLanguage: String
     let isFlipped: Bool
@@ -42,7 +42,7 @@ struct FlipCardView: View {
             foreground: .primary,
             background: AnyView(
                 RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous)
-                    .fill(Color(.secondarySystemGroupedBackground))
+                    .fill(.ultraThinMaterial)
                     .overlay(
                         RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous)
                             .strokeBorder(Color.primary.opacity(0.05), lineWidth: 1)
@@ -61,7 +61,7 @@ struct FlipCardView: View {
             foreground: .white,
             background: AnyView(
                 RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous)
-                    .fill(Theme.gradient(for: deckID))
+                    .fill(Theme.gradient(atIndex: colorIndex))
             ),
             starTint: card.isStarred ? .white : .white.opacity(0.6)
         )

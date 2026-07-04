@@ -25,7 +25,7 @@ struct BulkImportView: View {
                     .font(.callout.monospaced())
                     .padding(10)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 10))
+                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
 
                 TextEditor(text: $text)
                     .font(.body.monospaced())
@@ -33,7 +33,7 @@ struct BulkImportView: View {
                     .textInputAutocapitalization(.never)
                     .scrollContentBackground(.hidden)
                     .padding(8)
-                    .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 10))
+                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
                     .frame(maxHeight: .infinity)
 
                 if !text.isEmpty {

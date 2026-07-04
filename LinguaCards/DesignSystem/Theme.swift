@@ -59,21 +59,28 @@ enum Theme {
         [Color(hex: 0x14B8A6), Color(hex: 0x0EA5E9)], // teal → sky
     ]
 
-    /// Deterministically picks a gradient for a deck from its identifier so
-    /// the same deck always looks the same across launches. Uses the raw
-    /// UUID bytes (not `hashValue`, which is per-process randomized).
-    static func gradientColors(for id: UUID) -> [Color] {
+    /// Deterministic gradient index from a UUID's raw bytes (not `hashValue`,
+    /// which is per-process randomized). Used to seed a new deck's color.
+    static func gradientIndex(for id: UUID) -> Int {
         let bytes = id.uuid
         let sum = Int(bytes.0) &+ Int(bytes.6) &+ Int(bytes.9) &+ Int(bytes.15)
-        return deckGradients[sum % deckGradients.count]
+        return sum % deckGradients.count
+    }
+
+    static func colors(atIndex index: Int) -> [Color] {
+        deckGradients[((index % deckGradients.count) + deckGradients.count) % deckGradients.count]
+    }
+
+    static func gradient(atIndex index: Int) -> LinearGradient {
+        LinearGradient(colors: colors(atIndex: index), startPoint: .topLeading, endPoint: .bottomTrailing)
+    }
+
+    static func gradientColors(for id: UUID) -> [Color] {
+        colors(atIndex: gradientIndex(for: id))
     }
 
     static func gradient(for id: UUID) -> LinearGradient {
-        LinearGradient(
-            colors: gradientColors(for: id),
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
+        gradient(atIndex: gradientIndex(for: id))
     }
 }
 

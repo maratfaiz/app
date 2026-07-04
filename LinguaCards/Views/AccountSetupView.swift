@@ -14,7 +14,7 @@ struct AccountSetupView: View {
     @State private var colorIndex = 0
     @State private var emoji = ""
 
-    private let emojiChoices = ["", "🚀", "🦊", "🐬", "🌸", "⚡️", "🎧", "🍀", "🔥", "🦉"]
+    private let emojiChoices = [""] + EmojiCatalog.all
 
     private var canSave: Bool {
         !displayName.trimmingCharacters(in: .whitespaces).isEmpty
@@ -104,7 +104,7 @@ struct AccountSetupView: View {
                 }
                 .padding(20)
             }
-            .background(Color(.systemGroupedBackground))
+            .auroraBackground()
             .navigationTitle(isCreating ? "Create your account" : "Edit profile")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -151,7 +151,7 @@ struct AccountSetupView: View {
             .textInputAutocapitalization(autocap ? .sentences : .never)
             .autocorrectionDisabled(!autocap)
             .padding(12)
-            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
     }
 }

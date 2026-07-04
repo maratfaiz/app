@@ -23,6 +23,9 @@ struct CommunityDeck: Identifiable, Codable, Hashable {
     /// Simulated popularity used for the "Popular" rail and social proof.
     var saves: Int
     var cards: [CardDTO]
+    /// The deck's own color + emoji, carried so it looks the same for everyone.
+    var colorIndex: Int
+    var emoji: String
 
     var cardCount: Int { cards.count }
 
@@ -37,7 +40,9 @@ struct CommunityDeck: Identifiable, Codable, Hashable {
         authorHandle: String,
         authorColorIndex: Int,
         saves: Int,
-        cards: [CardDTO]
+        cards: [CardDTO],
+        colorIndex: Int = 0,
+        emoji: String = ""
     ) {
         self.id = id
         self.title = title
@@ -50,6 +55,8 @@ struct CommunityDeck: Identifiable, Codable, Hashable {
         self.authorColorIndex = authorColorIndex
         self.saves = saves
         self.cards = cards
+        self.colorIndex = colorIndex
+        self.emoji = emoji
     }
 }
 
@@ -106,7 +113,9 @@ final class CommunityStore {
             authorHandle: author.handle.isEmpty ? "@you" : author.handle,
             authorColorIndex: author.avatarColorIndex,
             saves: 0,
-            cards: deck.cards.map { CommunityDeck.CardDTO(front: $0.front, back: $0.back, example: $0.example) }
+            cards: deck.cards.map { CommunityDeck.CardDTO(front: $0.front, back: $0.back, example: $0.example) },
+            colorIndex: deck.colorIndex,
+            emoji: deck.emoji
         )
         published.insert(dto, at: 0)
         persist()
@@ -123,7 +132,9 @@ final class CommunityStore {
             title: community.title,
             desc: community.desc,
             sourceLang: community.sourceLang,
-            targetLang: community.targetLang
+            targetLang: community.targetLang,
+            colorIndex: community.emoji.isEmpty && community.colorIndex == 0 ? nil : community.colorIndex,
+            emoji: community.emoji
         )
         context.insert(deck)
         for card in community.cards {

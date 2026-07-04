@@ -58,6 +58,7 @@ struct DeckListView: View {
                     .searchable(text: $searchText, prompt: "Search decks")
                 }
             }
+            .auroraBackground()
             .navigationTitle("Decks")
             .navigationDestination(for: Deck.self) { deck in
                 DeckDetailView(deck: deck)
@@ -93,7 +94,13 @@ struct DeckCardView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            HStack(alignment: .top) {
+            HStack(alignment: .top, spacing: 12) {
+                if !deck.emoji.isEmpty {
+                    Text(deck.emoji)
+                        .font(.system(size: 30))
+                        .frame(width: 52, height: 52)
+                        .background(.white.opacity(0.22), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                }
                 VStack(alignment: .leading, spacing: 4) {
                     Text(deck.title)
                         .font(.system(.title3, design: .rounded).bold())
@@ -125,8 +132,8 @@ struct DeckCardView: View {
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Theme.gradient(for: deck.id), in: RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous))
-        .shadow(color: Theme.gradientColors(for: deck.id).first?.opacity(0.35) ?? .clear, radius: 14, y: 8)
+        .background(Theme.gradient(atIndex: deck.colorIndex), in: RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous))
+        .shadow(color: Theme.colors(atIndex: deck.colorIndex).first?.opacity(0.35) ?? .clear, radius: 14, y: 8)
     }
 
     private func pill(text: String, systemImage: String) -> some View {

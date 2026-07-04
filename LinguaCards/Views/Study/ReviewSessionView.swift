@@ -63,7 +63,7 @@ struct ReviewSessionView: View {
                 FlipCardView(
                     card: card,
                     direction: .termToTranslation,
-                    deckID: card.deck?.id ?? UUID(),
+                    colorIndex: card.deck?.colorIndex ?? 0,
                     promptLanguage: card.deck?.sourceLang ?? "en-US",
                     answerLanguage: card.deck?.targetLang ?? "ru-RU",
                     isFlipped: viewModel.isFlipped,

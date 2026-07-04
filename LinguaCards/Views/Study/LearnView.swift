@@ -160,7 +160,7 @@ struct LearnView: View {
                 .onSubmit { viewModel.submitWritten() }
                 .disabled(viewModel.phase != .asking)
                 .padding()
-                .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                 .overlay(
                     RoundedRectangle(cornerRadius: 14, style: .continuous)
                         .strokeBorder(writtenBorder(viewModel), lineWidth: 1.5)

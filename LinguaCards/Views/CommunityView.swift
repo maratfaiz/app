@@ -25,7 +25,7 @@ struct CommunityView: View {
                     results
                 }
             }
-            .background(Color(.systemGroupedBackground))
+            .auroraBackground()
             .navigationTitle("Explore")
             .navigationDestination(for: CommunityDeck.self) { deck in
                 CommunityDeckDetailView(deck: deck)

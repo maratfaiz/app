@@ -51,8 +51,10 @@ struct StatsView: View {
                         activitySection
                         decksSection
                     }
+                    .scrollContentBackground(.hidden)
                 }
             }
+            .auroraBackground()
             .navigationTitle("Stats")
         }
     }
@@ -164,6 +166,6 @@ struct StatsView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12))
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
     }
 }

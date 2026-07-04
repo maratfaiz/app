@@ -87,7 +87,7 @@ struct TypingTestView: View {
                     .onSubmit { viewModel.submit() }
                     .disabled(viewModel.phase != .answering)
                     .padding()
-                    .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                     .overlay(
                         RoundedRectangle(cornerRadius: 14, style: .continuous)
                             .strokeBorder(fieldBorder(viewModel), lineWidth: 1.5)

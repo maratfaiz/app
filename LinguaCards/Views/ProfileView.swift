@@ -55,7 +55,7 @@ struct ProfileView: View {
                 .padding(16)
                 .padding(.bottom, 24)
             }
-            .background(Color(.systemGroupedBackground))
+            .auroraBackground()
             .navigationTitle("Profile")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -151,7 +151,7 @@ struct ProfileView: View {
                         .padding(.vertical, 12)
                     }
                 }
-                .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: Theme.Radius.medium, style: .continuous))
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Theme.Radius.medium, style: .continuous))
             }
         }
     }

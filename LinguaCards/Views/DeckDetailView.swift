@@ -40,7 +40,7 @@ struct DeckDetailView: View {
             .padding(.horizontal, 16)
             .padding(.bottom, 32)
         }
-        .background(Color(.systemGroupedBackground))
+        .auroraBackground()
         .navigationTitle(deck.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -85,15 +85,28 @@ struct DeckDetailView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Text(verbatim: "\(LanguageCatalog.flag(for: deck.sourceLang)) \(LanguageCatalog.name(for: deck.sourceLang))")
-                Image(systemName: "arrow.right")
-                    .font(.caption)
-                Text(verbatim: "\(LanguageCatalog.flag(for: deck.targetLang)) \(LanguageCatalog.name(for: deck.targetLang))")
+            HStack(spacing: 12) {
+                if !deck.emoji.isEmpty {
+                    Text(deck.emoji)
+                        .font(.system(size: 32))
+                        .frame(width: 56, height: 56)
+                        .background(.white.opacity(0.22), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                }
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(deck.title)
+                        .font(.system(.title2, design: .rounded).bold())
+                        .foregroundStyle(.white)
+                        .lineLimit(2)
+                    HStack(spacing: 6) {
+                        Text(verbatim: "\(LanguageCatalog.flag(for: deck.sourceLang)) \(LanguageCatalog.name(for: deck.sourceLang))")
+                        Image(systemName: "arrow.right").font(.caption2)
+                        Text(verbatim: "\(LanguageCatalog.flag(for: deck.targetLang)) \(LanguageCatalog.name(for: deck.targetLang))")
+                    }
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(.white.opacity(0.9))
+                }
                 Spacer()
             }
-            .font(.subheadline.weight(.medium))
-            .foregroundStyle(.white)
 
             if !deck.desc.isEmpty {
                 Text(deck.desc)
@@ -110,8 +123,8 @@ struct DeckDetailView: View {
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Theme.gradient(for: deck.id), in: RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous))
-        .shadow(color: Theme.gradientColors(for: deck.id).first?.opacity(0.3) ?? .clear, radius: 14, y: 8)
+        .background(Theme.gradient(atIndex: deck.colorIndex), in: RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous))
+        .shadow(color: Theme.colors(atIndex: deck.colorIndex).first?.opacity(0.3) ?? .clear, radius: 14, y: 8)
         .padding(.top, 8)
     }
 
@@ -259,7 +272,7 @@ struct DeckDetailView: View {
                         }
                     }
                 }
-                .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: Theme.Radius.medium, style: .continuous))
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Theme.Radius.medium, style: .continuous))
             }
         }
     }

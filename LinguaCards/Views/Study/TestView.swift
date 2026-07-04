@@ -70,7 +70,7 @@ struct TestView: View {
             .padding(16)
             .padding(.bottom, 24)
         }
-        .background(Color(.systemGroupedBackground))
+        .auroraBackground()
     }
 
     private func scoreHeader(_ viewModel: TestViewModel) -> some View {

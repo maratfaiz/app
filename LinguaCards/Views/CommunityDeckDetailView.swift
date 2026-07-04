@@ -25,7 +25,7 @@ struct CommunityDeckDetailView: View {
             .padding(16)
             .padding(.bottom, 100)
         }
-        .background(Color(.systemGroupedBackground))
+        .auroraBackground()
         .navigationTitle(deck.title)
         .navigationBarTitleDisplayMode(.inline)
         .safeAreaInset(edge: .bottom) {
@@ -98,7 +98,7 @@ struct CommunityDeckDetailView: View {
                     .padding(.vertical, 12)
                 }
             }
-            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: Theme.Radius.medium, style: .continuous))
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Theme.Radius.medium, style: .continuous))
         }
     }
 

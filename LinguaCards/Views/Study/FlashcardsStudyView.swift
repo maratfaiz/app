@@ -73,7 +73,7 @@ struct FlashcardsStudyView: View {
                         FlipCardView(
                             card: next,
                             direction: options.direction,
-                            deckID: deck.id,
+                            colorIndex: deck.colorIndex,
                             promptLanguage: deck.promptLanguage(for: options.direction),
                             answerLanguage: deck.answerLanguage(for: options.direction),
                             isFlipped: false
@@ -86,7 +86,7 @@ struct FlashcardsStudyView: View {
                     FlipCardView(
                         card: card,
                         direction: options.direction,
-                        deckID: deck.id,
+                        colorIndex: deck.colorIndex,
                         promptLanguage: deck.promptLanguage(for: options.direction),
                         answerLanguage: deck.answerLanguage(for: options.direction),
                         isFlipped: viewModel.isFlipped,

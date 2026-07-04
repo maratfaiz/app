@@ -13,6 +13,11 @@ final class Deck {
     var targetLang: String
     var createdAt: Date
 
+    /// Index into `Theme.deckGradients` — the deck's personal color.
+    var colorIndex: Int = 0
+    /// Optional emoji shown as the deck's icon.
+    var emoji: String = ""
+
     @Relationship(deleteRule: .cascade, inverse: \Card.deck)
     var cards: [Card]
 
@@ -24,14 +29,20 @@ final class Deck {
         desc: String = "",
         sourceLang: String = "en-US",
         targetLang: String = "ru-RU",
-        createdAt: Date = .now
+        createdAt: Date = .now,
+        colorIndex: Int? = nil,
+        emoji: String = ""
     ) {
-        self.id = UUID()
+        let id = UUID()
+        self.id = id
         self.title = title
         self.desc = desc
         self.sourceLang = sourceLang
         self.targetLang = targetLang
         self.createdAt = createdAt
+        // Seed a varied color from the id when the caller doesn't pick one.
+        self.colorIndex = colorIndex ?? Theme.gradientIndex(for: id)
+        self.emoji = emoji
         self.cards = []
         self.sessions = []
     }
