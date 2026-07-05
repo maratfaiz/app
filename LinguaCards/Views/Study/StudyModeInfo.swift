@@ -66,5 +66,13 @@ struct StudyModeInfo: Identifiable {
             colors: [Color(hex: 0x8B5CF6), Color(hex: 0xEC4899)],
             minimumCards: MatchGameViewModel.minimumCards
         ),
+        StudyModeInfo(
+            mode: .arcade,
+            title: "Falling Words",
+            subtitle: "Catch the translation before it lands",
+            systemImage: "gamecontroller.fill",
+            colors: [Color(hex: 0x6366F1), Color(hex: 0x0EA5E9)],
+            minimumCards: FallingWordsViewModel.minimumCards
+        ),
     ]
 }

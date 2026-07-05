@@ -103,7 +103,7 @@ struct DeckCardView: View {
                 }
                 VStack(alignment: .leading, spacing: 4) {
                     Text(deck.title)
-                        .font(.system(.title3, design: .rounded).bold())
+                        .font(.lcTitle2)
                         .foregroundStyle(.white)
                         .lineLimit(2)
                     Text(verbatim: "\(LanguageCatalog.flag(for: deck.sourceLang)) \(LanguageCatalog.name(for: deck.sourceLang))  →  \(LanguageCatalog.flag(for: deck.targetLang)) \(LanguageCatalog.name(for: deck.targetLang))")

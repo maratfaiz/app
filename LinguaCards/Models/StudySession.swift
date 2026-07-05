@@ -9,6 +9,7 @@ enum StudyMode: String, Codable, CaseIterable {
     case typing
     case match
     case test
+    case arcade
     case review
 }
 

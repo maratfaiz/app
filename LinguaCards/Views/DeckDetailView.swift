@@ -234,7 +234,7 @@ struct DeckDetailView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Cards")
-                    .font(.title3.bold())
+                    .font(.lcTitle2)
                 Spacer()
                 Button {
                     isAddingCard = true
@@ -294,6 +294,8 @@ struct DeckDetailView: View {
             MatchGameView(deck: deck, options: options)
         case .test:
             TestView(deck: deck, options: options)
+        case .arcade:
+            FallingWordsView(deck: deck, options: options)
         case .review:
             ReviewSessionView(decks: [deck])
         }

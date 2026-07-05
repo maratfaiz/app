@@ -261,6 +261,16 @@
         }
       }
     },
+    "Best streak": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Лучшая серия"
+          }
+        }
+      }
+    },
     "Bio": {
       "localizations": {
         "ru": {
@@ -307,6 +317,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Карточки"
+          }
+        }
+      }
+    },
+    "Catch the translation before it lands": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поймайте перевод, пока он не упал"
           }
         }
       }
@@ -571,6 +591,16 @@
         }
       }
     },
+    "Falling Words": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Падающие слова"
+          }
+        }
+      }
+    },
     "False": {
       "localizations": {
         "ru": {
@@ -597,6 +627,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Листайте и переворачивайте карточки"
+          }
+        }
+      }
+    },
+    "Game over": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Игра окончена"
           }
         }
       }
@@ -807,6 +847,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Игра «Пары»"
+          }
+        }
+      }
+    },
+    "Missed": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пропущено"
           }
         }
       }
@@ -1617,6 +1667,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ваше имя"
+          }
+        }
+      }
+    },
+    "points": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "очков"
           }
         }
       }

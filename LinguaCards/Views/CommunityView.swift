@@ -86,7 +86,7 @@ struct CommunityView: View {
 
     private func sectionHeader(_ title: LocalizedStringKey, systemImage: String) -> some View {
         Label(title, systemImage: systemImage)
-            .font(.title3.bold())
+            .font(.lcTitle2)
             .padding(.horizontal, 16)
     }
 }

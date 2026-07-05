@@ -130,7 +130,7 @@ struct DeckFormView: View {
             }
             VStack(alignment: .leading, spacing: 4) {
                 Text(title.isEmpty ? "Deck title" : title)
-                    .font(.system(.title3, design: .rounded).bold())
+                    .font(.lcTitle2)
                     .foregroundStyle(.white)
                 Text(verbatim: "\(LanguageCatalog.flag(for: sourceLang)) → \(LanguageCatalog.flag(for: targetLang))")
                     .font(.caption)
